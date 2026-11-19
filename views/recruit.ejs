@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruit | Grand Line Registry</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="min-h-screen bg-base-100">
+  <main class="container mx-auto px-4 py-4">
+    <%- include('partials/navbar', { title: 'Join the Crew' }) %>
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold mb-2">Join the Straw Hat Pirates</h1>
+      <p class="text-base-content/70 mb-6">Tell us why you belong on the Thousand Sunny.</p>
+      <% if (errors.length > 0) { %>
+        <div role="alert" class="alert alert-error mb-5"><ul class="list-disc pl-5"><% for (const error of errors) { %><li><%= error %></li><% } %></ul></div>
+      <% } %>
+      <% if (success) { %><div role="alert" class="alert alert-success mb-5"><%= success %></div><% } %>
+      <form action="/recruit" method="POST" class="card bg-base-200 shadow-md">
+        <div class="card-body gap-5">
+          <label class="form-control"><span class="label mb-2">Your Name</span><input class="input w-full" type="text" name="applicantName" value="<%= form.applicantName || '' %>" placeholder="Your name"></label>
+          <label class="form-control"><span class="label mb-2">Special Skill</span><input class="input w-full" type="text" name="skill" value="<%= form.skill || '' %>" placeholder="Your best skill"></label>
+          <label class="form-control"><span class="label mb-2">Desired Role</span>
+            <select class="select w-full" name="role">
+              <option value="Select a role">Select a role</option>
+              <% for (const role of ['Navigator', 'Cook', 'Sniper', 'Doctor', 'Musician', 'Other']) { %>
+                <option value="<%= role %>" <%= form.role === role ? 'selected' : '' %>><%= role %></option>
+              <% } %>
+            </select>
+          </label>
+          <label class="form-control"><span class="label mb-2">Why should Luffy let you join?</span><textarea class="textarea w-full min-h-28" name="message" placeholder="Tell us your story"><%= form.message || '' %></textarea></label>
+          <fieldset><legend class="font-semibold mb-3">Preferred Sea</legend><div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <% for (const sea of ['East Blue', 'West Blue', 'North Blue', 'South Blue']) { %>
+              <label class="label cursor-pointer justify-start gap-3"><input class="radio radio-primary" type="radio" name="sea" value="<%= sea %>" <%= form.sea === sea ? 'checked' : '' %>><span><%= sea %></span></label>
+            <% } %>
+          </div></fieldset>
+          <label class="label cursor-pointer justify-start gap-3"><input class="checkbox checkbox-primary" type="checkbox" name="agreeTerms" value="on" <%= form.agreeTerms ? 'checked' : '' %>><span>I understand the risks of the Grand Line</span></label>
+          <button class="btn btn-primary w-full" type="submit">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

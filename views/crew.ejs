@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crew | Grand Line Registry</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="min-h-screen bg-base-100">
+  <main class="container mx-auto px-4 py-4">
+    <%- include('partials/navbar', { title: 'Crew Roster' }) %>
+    <h1 class="text-3xl font-bold mb-6">Crew Roster</h1>
+    <div class="overflow-x-auto bg-base-200 rounded-box">
+      <table class="table table-zebra">
+        <thead><tr><th>#</th><th>Name</th><th>Role</th><th>Devil Fruit</th><th>Bounty</th><th>Status</th></tr></thead>
+        <tbody>
+          <% let number = 1; %>
+          <% for (const member of crew) { %>
+            <tr>
+              <td><%= number++ %></td>
+              <td class="font-semibold"><%= member.name %></td>
+              <td><%= member.role %></td>
+              <td><%= member.devilFruit %></td>
+              <td><%= Number(member.bounty).toLocaleString('en-US') %> Berries</td>
+              <td>
+                <% if (member.status === 'active') { %>
+                  <span class="badge badge-success">Active</span>
+                <% } else if (member.status === 'pending') { %>
+                  <span class="badge badge-warning">Pending Approval</span>
+                <% } else { %>
+                  <span class="badge badge-error">Bounty Frozen</span>
+                <% } %>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Grand Line Registry</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="min-h-screen bg-base-100">
+  <main class="container mx-auto px-4 py-4">
+    <%- include('partials/navbar', { title: 'The Crew' }) %>
+    <div class="grid grid-cols-1 mb-8">
+      <div class="hero bg-base-200 rounded-box py-12 px-5 text-center">
+        <div><h1 class="text-4xl font-bold">The Straw Hat Pirates</h1><p class="mt-3 text-base-content/70">Meet the legends sailing toward the One Piece.</p></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% for (const member of crew) { %>
+        <div class="card bg-base-200 shadow-md">
+          <div class="card-body">
+            <h2 class="card-title"><%= member.name %></h2>
+            <p><strong>Role:</strong> <%= member.role %></p>
+            <p><strong>Devil Fruit:</strong> <%= member.devilFruit %></p>
+            <p><strong>Bounty:</strong> <%= Number(member.bounty).toLocaleString('en-US') %> Berries</p>
+            <div class="my-2">
+              <% if (member.status === 'active') { %>
+                <span class="badge badge-success">Active</span>
+              <% } else if (member.status === 'pending') { %>
+                <span class="badge badge-warning">Pending Approval</span>
+              <% } else { %>
+                <span class="badge badge-error">Bounty Frozen</span>
+              <% } %>
+            </div>
+            <div class="card-actions justify-end"><a class="btn btn-primary" href="/crew">View All Crew</a></div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </main>
+</body>
+</html>

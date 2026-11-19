@@ -1,0 +1,18 @@
+{
+  "name": "grand-line-registry",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "tw:build": "npx @tailwindcss/cli -i ./public/css/tailwind.css -o ./public/css/main.css --watch",
+    "build": "npx @tailwindcss/cli -i ./public/css/tailwind.css -o ./public/css/main.css"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "daisyui": "^5.0.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "tailwindcss": "^4.1.0"
+  }
+}
